@@ -1,5 +1,3 @@
-const webpack = require('webpack');
-
 module.exports = {
   mode: 'development',
   devtool: 'cheap-module-source-map',
@@ -7,9 +5,43 @@ module.exports = {
     open: true,
     hot: true,
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env.name': JSON.stringify('dev'),
-    }),
-  ],
+  module: {
+    rules: [
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[folder]__[local]--[hash:base64:5]',
+              },
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+        include: /\.module\.(scss|css)$/,
+      },
+      {
+        test: /\.(scss|css)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ],
+        exclude: /\.module\.(scss|css)$/,
+      },
+    ],
+  },
 };

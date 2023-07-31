@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
@@ -20,19 +19,6 @@ module.exports = {
         ],
       },
       {
-        test: /\.(scss|css)$/,
-        use: [
-          process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-        ],
-      },
-      {
         test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
         type: 'asset/resource',
       },
@@ -44,6 +30,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '..', './build'),
+    clean: true,
     filename: '[name].[chunkhash].js',
   },
   plugins: [
