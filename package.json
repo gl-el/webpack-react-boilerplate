@@ -8,7 +8,8 @@
     "build": "webpack --config webpack/webpack.config.js --env env=production --mode=production",
     "test": "npx jest",
     "lint": "eslint src",
-    "prettier": "prettier --write src/**/*.*"
+    "prettier": "prettier --write src/**/*.*",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -59,14 +60,17 @@
     "webpack-dev-server": "^4.15.1",
     "webpack-merge": "^5.9.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
-    "*.ts": [
-      "eslint",
-      "prettier --write src/**/*.ts"
+    "*": [
+      "prettier --write src/**/*.*"
     ],
-    "*.tsx": [
-      "eslint",
-      "prettier --write src/**/*.tsx"
+    "*.(ts|tsx)": [
+      "eslint"
     ]
   }
 }
