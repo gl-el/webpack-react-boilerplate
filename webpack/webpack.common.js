@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -40,7 +39,6 @@ module.exports = {
       favicon: 'public/images/favicon.ico',
       inject: true,
     }),
-    new CleanWebpackPlugin(),
     new Dotenv({ path: path.resolve(__dirname, '..', '.env') }),
   ],
 };
